@@ -7,9 +7,10 @@ class Piece:
         self.tex = tex
         self.set_tex()
         self.tex_rect = tex_rect
+        self.id = color + name
 
-    def set_tex(self):
-        self.tex = os.path.join(f'img/{self.name}{self.color}.png')
+    def set_tex(self, size = 80):
+        self.tex = os.path.join(f'img/img_{size}/{self.color}{self.name}.png')
        
     #    /home/jrdfm/fun/chess/chess_1.0/img
 
@@ -33,19 +34,19 @@ class Bishop(Piece):
 class Rook(Piece):
 
     def __init__(self, color):
-        super().__init__('R', color)
+        super().__init__(color,'R')
 
 class Queen(Piece):
 
     def __init__(self, color):
-        super().__init__('Q', color)
+        super().__init__(color,'Q')
 
 class King(Piece):
 
     def __init__(self, color):
         self.left_rook = None
         self.right_rook = None
-        super().__init__('king', color)
+        super().__init__('K', color)
 
 
 
@@ -53,12 +54,13 @@ if __name__ == '__main__':
 
     import os 
     from PIL import Image
-    p = Piece('b','Q')
+    p = Piece('Q','b')
     # print("ASS")
     # entries = os.listdir('img/')
     # for entry in entries:
     #     print(entry)
-    img = os.path.join(f'img/{p.name}{p.color}.png')
+    img = os.path.join(f'img/img_80/{p.color}{p.name}.png')
+    print(f'name{p.name} color {p.color}')
     # cwd = os.getcwd()
     # print(cwd)
     # print(img)

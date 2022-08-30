@@ -2,11 +2,13 @@ import pygame, chess
 from const import *
 from board import Board
 from piece import *
+from dragger import *
 
 
 class Game(object):
     def __init__(self):
         self.board = Board()
+        self.dragger = Dragger()
 
 
     def show_background(self, surface):
@@ -21,14 +23,15 @@ class Game(object):
                 pygame.draw.rect(surface, color, rect)
 
     def show_pieces(self, surface):
+        board, dragger = self.board, self.dragger
         for row in range(ROWS):
             for col in range(COLS):
-                loc = (row,col)
-                if self.board.has_piece(loc):
-                    name = self.board.get_color(loc)
-                    color = self.board.get_name(loc)
-                    piece = Piece(name, color)
-                    img = pygame.image.load(piece.tex)
-                    img_cen = col * SQ_SIZE + SQ_SIZE // 2, row * SQ_SIZE + SQ_SIZE // 2
-                    piece.tex_rect = img.get_rect(center = img_cen)
-                    surface.blit(img, piece.tex_rect)
+                pos = (row,col)
+                if board.has_piece(pos):
+                    piece = board.b[row][col] 
+                    if piece is not dragger.piece:
+                        piece.set_tex(size = 80)
+                        img = pygame.image.load(piece.tex)
+                        img_cen = col * SQ_SIZE + SQ_SIZE // 2, row * SQ_SIZE + SQ_SIZE // 2
+                        piece.tex_rect = img.get_rect(center = img_cen)
+                        surface.blit(img, piece.tex_rect)
