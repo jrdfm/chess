@@ -1,6 +1,6 @@
 # Screen dimensions
-WIDTH = 800
-HEIGHT = 800
+WIDTH = 600
+HEIGHT = 600
 
 # Board dimensions
 ROWS = 8
@@ -8,6 +8,7 @@ COLS = 8
 SQ_SIZE = WIDTH // COLS
 
 BROWN, LIGHT_BROWN = (235, 209, 166), (165, 117, 80)
+RED, LIGHT_RED = '#C86464', '#C84646'
 
 c = [(i,j) for i in range(7,-1,-1) for j in range(0,8)]
 b  = [i for i in range(0,64)]

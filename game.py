@@ -42,5 +42,7 @@ class Game(object):
             piece = dragger.piece
 
             for move in piece.valid_moves:
-                # color = 
-                pass
+                row , col = move
+                color = RED if (row + col) % 2 == 0 else LIGHT_RED
+                rect = (col * SQ_SIZE, row * SQ_SIZE, SQ_SIZE, SQ_SIZE)
+                pygame.draw.rect(surface, color, rect)
