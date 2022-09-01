@@ -35,3 +35,11 @@ class Game(object):
                         img_cen = col * SQ_SIZE + SQ_SIZE // 2, row * SQ_SIZE + SQ_SIZE // 2
                         piece.tex_rect = img.get_rect(center = img_cen)
                         surface.blit(img, piece.tex_rect)
+
+    def show_moves(self, surface):
+        dragger = self.dragger
+        if dragger.active:
+            piece = dragger.piece
+
+            for move in piece.valid_moves:
+                color = 

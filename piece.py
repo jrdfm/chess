@@ -7,7 +7,7 @@ class Piece:
         self.tex = tex
         self.set_tex()
         self.tex_rect = tex_rect
-        self.id = color + name
+        self.valid_moves = []
 
     def set_tex(self, size = 80):
         self.tex = os.path.join(f'img/img_{size}/{self.color}{self.name}.png')

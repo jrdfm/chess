@@ -51,6 +51,10 @@ class Board:
         r, c = pos
         return (0 <= r and r <= 7) and (0 <= c and c <= 7) 
 
+    def get_moves(self, pos):
+        pass
+
+
     def move(self, piece, move):
         i = move.i # (row, col)
         f = move.f
@@ -65,7 +69,7 @@ class Move:
     def __init__(self, initial, final):
         self.i = initial
         self.f = final
-    def str_(self):
+    def to_uci(self):
         to_str = chess.square_name
         i, f  = c_to_b[self.i], c_to_b[self.f]
         return f'{to_str(i)}{to_str(f)}'
@@ -87,5 +91,4 @@ if __name__ == '__main__':
 
     # # print(b.valid((0,0)))
     # print(f'{b.get_piece((7,0))}')
-    print(type(m.str_()))
-    print(type("ASS"))
+    print(m.to_uci())
