@@ -1,3 +1,4 @@
+from re import I
 import chess
 from const import *
 from piece import *
@@ -7,6 +8,7 @@ class Board:
         self.board = chess.Board()
         self.b = [[None for _ in range(COLS)] for _ in range(ROWS)]
         self._create()
+        self.set_moves()
 
     def _create(self):
         for row in range(ROWS):
@@ -50,6 +52,26 @@ class Board:
     def valid(self, pos):
         r, c = pos
         return (0 <= r and r <= 7) and (0 <= c and c <= 7) 
+
+    def set_moves(self):
+        for m in self.board.legal_moves:
+            i = chess.parse_square(m.uci()[:2])
+            f = chess.parse_square(m.uci()[2:])
+            pos =  b_to_c[i] #(row,col)
+            if self.has_piece(pos):
+                self.get_piece(pos).valid_moves.append(b_to_c[f])
+
+    def update_moves(self, piece):
+        for m in self.board.legal_moves:
+            i = chess.parse_square(m.uci()[:2])
+            f = chess.parse_square(m.uci()[2:])
+            pos =  b_to_c[i] #(row,col)
+            if self.has_piece(pos) and self.get_piece(pos).moved:
+                self.get_piece(pos).valid_moves.append(b_to_c[f])
+
+
+
+
 
     def get_moves(self, pos):
         pass

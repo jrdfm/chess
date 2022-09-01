@@ -41,8 +41,9 @@ class Main:
 
                         # moves 
                         game.show_background(screen)
-                        game.show_moves(screen)
+                        # game.show_moves(screen)
                         game.show_pieces(screen)
+                        print(f'{piece.valid_moves}')
 
                 elif event.type == pygame.MOUSEMOTION:
                     if dragger.active:

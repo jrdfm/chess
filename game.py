@@ -42,4 +42,5 @@ class Game(object):
             piece = dragger.piece
 
             for move in piece.valid_moves:
-                color = 
+                # color = 
+                pass
