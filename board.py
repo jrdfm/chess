@@ -3,6 +3,7 @@ import chess
 from const import *
 from piece import *
 
+
 class Board:
     def __init__(self):
         self.board = chess.Board()
@@ -62,35 +63,49 @@ class Board:
                 self.get_piece(pos).valid_moves.append(b_to_c[f])
 
     def update_moves(self, piece):
+        
         for m in self.board.legal_moves:
             i = chess.parse_square(m.uci()[:2])
             f = chess.parse_square(m.uci()[2:])
-            pos =  b_to_c[i] #(row,col)
-            if self.has_piece(pos) and self.get_piece(pos).moved:
-                self.get_piece(pos).valid_moves.append(b_to_c[f])
-
-
+            row , col  =  b_to_c[i] 
+            if self.b[row][col] is piece:
+                piece.valid_moves.append(b_to_c[f])
 
 
 
     def get_moves(self, pos):
         pass
 
+    def is_legal(self, move):
+        ini, fin = move
+        if ini != fin:
+            uci = Move(ini, fin).to_uci()
+            return self.board.is_legal(chess.Move.from_uci(uci))
+        else:
+            return False
 
     def move(self, piece, move):
-        i = move.i # (row, col)
-        f = move.f
-        # m = chess.Move.from_uci('e7e5')
-        # board.push(m)
-
-        self.b[i.row][i.col].piece = None
-        self.b[f.row][f.col].piece = piece
-
+        i, f = move
+        uci = Move(i, f).to_uci()
+        # push move
+        self.board.push(chess.Move.from_uci(uci))
+        
+        # update board
+        i_r, i_c = i
+        f_r, f_c = f
+        self.b[i_r][i_c] = None
+        self.b[f_r][f_c] = piece
+        piece.moved = True
+        piece.valid_moves = []
+        # self.update_moves(piece)
+        self.set_moves() # update enemy moves
+        
 
 class Move:
     def __init__(self, initial, final):
         self.i = initial
         self.f = final
+        
     def to_uci(self):
         to_str = chess.square_name
         i, f  = c_to_b[self.i], c_to_b[self.f]
@@ -98,6 +113,7 @@ class Move:
 
     def __eq__(self, other):
         return self.i == other.i and self.f == other.f
+
 
 
 if __name__ == '__main__':

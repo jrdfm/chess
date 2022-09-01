@@ -4,6 +4,7 @@ from const import *
 from game import Game
 from piece import *
 
+
 class Main:
     def __init__(self):
         pygame.init()
@@ -51,7 +52,23 @@ class Main:
                         dragger.update_blit(screen)
 
                 elif event.type == pygame.MOUSEBUTTONUP:
-                    dragger.undrag_piece(piece)
+                    if dragger.active:
+                        piece = dragger.piece
+                        dragger.update_mouse(event.pos)
+                        r_row = dragger.mouseY // SQ_SIZE
+                        r_col = dragger.mouseX // SQ_SIZE
+                        pos = (r_row,r_col)
+                        ini = (dragger.init_row, dragger.init_col)
+                        fin = (r_row, r_col )
+                        move = (ini, fin)
+
+                        if game.board.is_legal(move):
+                            game.board.move(piece, move)
+                            game.show_background(screen)
+                            game.show_pieces(screen)
+
+                        dragger.undrag_piece(piece)
+
                 elif event.type == pygame.QUIT:
                     run = False
 
