@@ -15,7 +15,7 @@ class Main:
 
 
 
-    def loop(self, mode):
+    def loop(self, mode, player_1 = None, player_2 = None):
         screen, game, dragger = self.screen, self.game, self.game.dragger
         run = True
         while run:
@@ -78,8 +78,10 @@ class Main:
             elif mode == 'E':
                 # pygame.display.update()
                 board = self.game.board
-                player_1 = Player(board, 'w', True)
-                player_2 = Player(board, 'b',True)
+                # player_1 = Player(board, 'w', True)
+                # player_2 = Player(board, 'b',True)
+                # player_1 = Player(board, 'w', True)
+                # player_2 = Player(board, 'b',True)
                 if not board.board.is_game_over():
             
                     if player_1.is_turn():
@@ -151,4 +153,7 @@ if __name__ == '__main__':
     else:
         m = Main()
         board = m.game.board
-        m.loop(mode)
+
+        player_1 = Player(board, 'w', True)
+        player_2 = Player(board, 'b',True)
+        m.loop(mode, player_1, player_2)

@@ -17,6 +17,7 @@ class Player(object):
         self.init_stockfish()
 
     def init_stockfish(self):
+        print('init')
         self.engine = True
         try:
             self.__engine = chess.engine.SimpleEngine.popen_uci("/usr/games/stockfish")
