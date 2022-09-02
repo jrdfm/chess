@@ -34,17 +34,17 @@ class Main:
                     c_col = dragger.mouseX // SQ_SIZE
                     pos = (c_row,c_col)
 
-                    if game.board.has_piece(pos):
+                    if game.board.has_piece(pos) :
                         piece = game.board.get_piece(pos)
-                        game.board
-                        dragger.save_init(event.pos)
-                        dragger.drag_piece(piece)
+                        b = game.board
+                        if piece.color == c_b[b.board.turn]:
+                            
+                            dragger.save_init(event.pos)
+                            dragger.drag_piece(piece)
 
-                        # moves 
-                        game.show_background(screen)
-                        # game.show_moves(screen)
-                        game.show_pieces(screen)
-                        print(f'{piece.valid_moves}')
+                            # moves 
+                            game.show_background(screen)
+                            game.show_pieces(screen)
 
                 elif event.type == pygame.MOUSEMOTION:
                     if dragger.active:

@@ -43,12 +43,6 @@ class Board:
             row, col = pos
             return self.b[row][col]
 
-    # def get_piece(self, pos):
-    #     if self.has_piece(pos):
-    #         name = self.get_color(pos)
-    #         color = self.get_name(pos)
-    #         return  Piece(name, color) 
-                    
 
     def valid(self, pos):
         r, c = pos
@@ -56,25 +50,24 @@ class Board:
 
     def set_moves(self):
         for m in self.board.legal_moves:
-            i = chess.parse_square(m.uci()[:2])
-            f = chess.parse_square(m.uci()[2:])
-            pos =  b_to_c[i] #(row,col)
-            if self.has_piece(pos):
-                self.get_piece(pos).valid_moves.append(b_to_c[f])
+            try:
+                i = chess.parse_square(m.uci()[:2])
+                f = chess.parse_square(m.uci()[2:])
+                pos =  b_to_c[i] #(row,col)
+                if self.has_piece(pos):
+                    self.get_piece(pos).valid_moves.append(b_to_c[f])
+            except ValueError:
+                pass
 
-    def update_moves(self, piece):
-        
-        for m in self.board.legal_moves:
-            i = chess.parse_square(m.uci()[:2])
-            f = chess.parse_square(m.uci()[2:])
-            row , col  =  b_to_c[i] 
-            if self.b[row][col] is piece:
-                piece.valid_moves.append(b_to_c[f])
+    def update_moves(self, piece, move):
+        for row in range(ROWS):
+            for col in range(COLS):
+                cur_piece = self.b[row][col]
+                if cur_piece != None and piece.color == cur_piece.color and (move in cur_piece.valid_moves):
+                    cur_piece.valid_moves.remove(move)
 
 
 
-    def get_moves(self, pos):
-        pass
 
     def is_legal(self, move):
         ini, fin = move
@@ -91,13 +84,13 @@ class Board:
         self.board.push(chess.Move.from_uci(uci))
         
         # update board
-        i_r, i_c = i
-        f_r, f_c = f
-        self.b[i_r][i_c] = None
-        self.b[f_r][f_c] = piece
+        i_row, i_col = i
+        f_row, f_col = f
+        self.b[i_row][i_col] = None
+        self.b[f_row][f_col] = piece
         piece.moved = True
         piece.valid_moves = []
-        # self.update_moves(piece)
+        self.update_moves(piece, (f_row, f_col)) # remove moved to pos from friends valid
         self.set_moves() # update enemy moves
         
 

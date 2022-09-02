@@ -67,5 +67,5 @@ if __name__ == '__main__':
     # print(img)
     # print(os.path.abspath(img))
     # im = Image.open(os.path.abspath(img))
-    im = Image.open(img)
-    im.show()
+    # im = Image.open(img)
+    # im.show()
