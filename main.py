@@ -78,10 +78,7 @@ class Main:
             elif mode == 'E':
                 # pygame.display.update()
                 board = self.game.board
-                # player_1 = Player(board, 'w', True)
-                # player_2 = Player(board, 'b',True)
-                # player_1 = Player(board, 'w', True)
-                # player_2 = Player(board, 'b',True)
+
                 if not board.board.is_game_over():
             
                     if player_1.is_turn():
@@ -94,52 +91,17 @@ class Main:
 
                 else:
                     print("GAME IS OVER")
-                    pygame.quit()
+                    run = False
 
-                # board = self.game.board.board
-                # for event in pygame.event.get():
-                #     p = Play(board)
-                #     p.play()
-                #     pygame.display.update()
+                for event in pygame.event.get():
 
-                #     if event.type == pygame.QUIT:
-                #         break
-
-
-                #     elif event.type == pygame.USEREVENT:
-                #         print(f'event')
-                #         game.show_background(screen)
-                #         game.show_pieces(screen)
-                #         pygame.display.update()
-                    
+                    if event.type == pygame.QUIT:
+                        run = False
 
             pygame.display.update()
         pygame.quit()
 
 
-# class Play:
-#     def __init__(self, board):
-#         self._board = board
-
-#     def play(self):
-#         player_1 = Player(self._board, 'w', True)
-#         player_2 = Player(self._board, 'b',True)
-#         board = self._board
-#         move_event = pygame.event.Event(pygame.USEREVENT)
-        
-#         if not board.is_game_over():
-            
-#             if player_1.is_turn():
-#                 board = player_1.engine_move()
-#                 pygame.event.post(move_event)
-
-#             else:
-#                 board = player_2.engine_move()
-#                 pygame.event.post(move_event)
-
-#         else:
-#             print("GAME IS OVER")
-#             pygame.event.post(pygame.QUIT)
 
 
 if __name__ == '__main__':
