@@ -1,5 +1,6 @@
+#!/usr/bin/python3
 
-import pygame, sys
+import pygame, sys, os
 from const import *
 from game import Game
 from piece import *
@@ -20,6 +21,7 @@ class Main:
         run = True
         while run:
             game.show_background(screen)
+            game.show_last_move(screen)
             game.show_moves(screen)
             game.show_pieces(screen)
 
@@ -83,16 +85,14 @@ class Main:
             
                     if player_1.is_turn():
                         player_1.engine_move()
-                        pygame.display.update()
-
                     else:
                         player_2.engine_move()
-                        pygame.display.update()
-
                 else:
                     print("GAME IS OVER")
                     run = False
-
+                   
+                    break
+                
                 for event in pygame.event.get():
 
                     if event.type == pygame.QUIT:
@@ -101,6 +101,10 @@ class Main:
             pygame.display.update()
         pygame.quit()
 
+        
+
+        
+
 
 
 
@@ -108,7 +112,7 @@ if __name__ == '__main__':
 
 
     mode = "E"
-    
+    # mode = "H"  
 
     if mode == "H":
         Main().loop(mode)
@@ -119,3 +123,5 @@ if __name__ == '__main__':
         player_1 = Player(board, 'w', True)
         player_2 = Player(board, 'b',True)
         m.loop(mode, player_1, player_2)
+
+    
