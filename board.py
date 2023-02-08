@@ -10,6 +10,7 @@ class Board:
         self.b = [[None for _ in range(COLS)] for _ in range(ROWS)]
         self._create()
         self.set_moves()
+        self.last_move = None
 
     def _create(self):
         for row in range(ROWS):
@@ -88,7 +89,7 @@ class Board:
         f_row, f_col = f
         self.b[i_row][i_col] = None
         self.b[f_row][f_col] = piece
-        piece.moved = True
+        self.last_move = move
         piece.valid_moves = []
         self.update_moves(piece, (f_row, f_col)) # remove moved to pos from friends valid
         self.set_moves() # update enemy moves

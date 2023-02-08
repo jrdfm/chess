@@ -20,6 +20,7 @@ class Main:
         run = True
         while run:
             game.show_background(screen)
+            game.show_last_move(screen)
             game.show_moves(screen)
             game.show_pieces(screen)
 
@@ -125,7 +126,7 @@ if __name__ == '__main__':
 
 
     mode = "E"
-    
+    # mode = "H"  
 
     if mode == "H":
         Main().loop(mode)

@@ -12,13 +12,13 @@ from min_max import *
 class Player(object):
     def __init__(self, board, color ,engine = None):
         self._board = board.board
+        self.board = board
         self.b = board.b
         self.color  = color
         self._engine = engine
         self.init_stockfish()
 
     def init_stockfish(self):
-        print('init')
         self.engine = True
         try:
             self.__engine = chess.engine.SimpleEngine.popen_uci("/usr/games/stockfish")
@@ -41,7 +41,7 @@ class Player(object):
     
     def engine_move(self):
      
-        result = self.__engine.play(self._board, chess.engine.Limit(time= 0.5))
+        result = self.__engine.play(self._board, chess.engine.Limit(time= 0.1))
         move = result.move
         try:
             self._board.push(move)
@@ -52,6 +52,7 @@ class Player(object):
             # update board
             i_row, i_col = c_i
             f_row, f_col = c_f
+            self.board.last_move = (c_i,c_f)
 
             self.b[f_row][f_col] = self.b[i_row][i_col] 
             self.b[i_row][i_col] = None
@@ -123,7 +124,7 @@ class Play:
 
         else:
             print("GAME IS OVER")
-            pygame.event.post(pygame.QUIT)
+            # pygame.event.post(pygame.QUIT)
 
 
 

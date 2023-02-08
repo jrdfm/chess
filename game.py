@@ -46,3 +46,11 @@ class Game(object):
                 color = LIGHT_RED if (row + col) % 2 == 0 else RED
                 rect = (col * SQ_SIZE, row * SQ_SIZE, SQ_SIZE, SQ_SIZE)
                 pygame.draw.rect(surface, color, rect)
+
+    def show_last_move(self, surface):
+        if self.board.last_move:
+            _, fin = self.board.last_move
+            row, col = fin
+            color = LIGHT_RED if (row + col) % 2 == 0 else RED
+            rect = (col * SQ_SIZE, row * SQ_SIZE, SQ_SIZE, SQ_SIZE)
+            pygame.draw.rect(surface, color, rect)
