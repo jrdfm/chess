@@ -1,4 +1,4 @@
-
+#!/usr/bin/env python3
 import pygame, sys
 from const import *
 from game import Game
@@ -83,23 +83,40 @@ class Main:
             
                     if player_1.is_turn():
                         player_1.engine_move()
+                        # player_1.rand_player_move()
                         pygame.display.update()
 
                     else:
-                        player_2.engine_move()
+                        player_2.engine_move_()
                         pygame.display.update()
 
                 else:
-                    print("GAME IS OVER")
+
+                    res = board.board.outcome().result()
+                    status = board.board.outcome().termination
+                    winner = {True:"WHITE",False:"BLACK"}[board.board.outcome().winner]
+
+                    print(f"Result: {res} Status: {status} Winner: {winner}")
+                    print("GAME OVER")
                     run = False
+                    pygame.quit()
+                    sys.exit()
 
-                for event in pygame.event.get():
 
-                    if event.type == pygame.QUIT:
-                        run = False
+
+
 
             pygame.display.update()
+
+        for event in pygame.event.get():
+        
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                run = False
+                sys.exit()
         pygame.quit()
+
+
 
 
 
@@ -119,3 +136,4 @@ if __name__ == '__main__':
         player_1 = Player(board, 'w', True)
         player_2 = Player(board, 'b',True)
         m.loop(mode, player_1, player_2)
+

@@ -1,6 +1,7 @@
+import chess
 # Screen dimensions
-WIDTH = 800
-HEIGHT = 800
+WIDTH = 600
+HEIGHT = 600
 
 # Board dimensions
 ROWS = 8
@@ -21,6 +22,9 @@ t_n = {1:'P', 2:'N', 3:'B', 4:'R', 5:'Q', 6:'K'}
 # color dict
 c_b = {True: 'w', False: 'b'}
 
+# values dict
+
+val = {'p':-1,'n':-3,'b':-3,'k':0,'q':9,'r':5,'P':1,'N':3,'B':3,'K':0,'Q':9,'R':5}
 
 
 if __name__ == '__main__':
