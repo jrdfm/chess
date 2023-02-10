@@ -95,7 +95,7 @@ class Main:
 
                     res = board.board.outcome().result()
                     status = board.board.outcome().termination
-                    winner = {True:"WHITE",False:"BLACK"}[board.board.outcome().winner]
+                    winner = {True:"WHITE",False:"BLACK",None:"DRAW"}[board.board.outcome().winner]
 
                     print(f"Result: {res} Status: {status} Winner: {winner}")
                     print("GAME OVER")
