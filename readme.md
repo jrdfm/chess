@@ -1,4 +1,4 @@
-# Chess AI Project
+# Chess AI 
 
 This Chess AI project is a versatile chess engine developed in Python. It is capable of various play modes and employs advanced algorithms to provide a challenging chess-playing experience. The project highlights include:
 
