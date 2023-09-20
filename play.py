@@ -39,7 +39,7 @@ class Player(object):
     #     self.b[f_row][f_col] = piece
 
     
-    def engine_move(self):
+    def stock_move(self):
      
         result = self.__engine.play(self._board, chess.engine.Limit(time= 0.1))
         move = result.move
@@ -63,7 +63,7 @@ class Player(object):
             traceback.print_exc()
         return self._board
 
-    def engine_move_(self):
+    def engine_move(self):
          
         move = min_max_move(self._board, 3,-9999, 9999)
         # print(move)
@@ -112,14 +112,15 @@ class Play:
         move_event = pygame.event.Event(pygame.USEREVENT)
         
         if not board.is_game_over():
-            
+            # use player.stock_move() for stockfish engine, player.engine_move() for min_max engine
+            # or player.rand_player_move() for random player
             if player_1.is_turn():
                 board = player_1.rand_player_move()
                 pygame.event.post(move_event)
 
             elif player_2.is_turn():
                 print("Hi")
-                board = player_2.engine_move_()
+                board = player_2.engine_move()
                 pygame.event.post(move_event)
 
         else:
